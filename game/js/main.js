@@ -1,24 +1,22 @@
+import {player,initPlayer,drawPlayer} from "./player.js";
+import {spawnEnemy,enemies} from "./enemies.js";
+
+
 const canvas=document.getElementById("gameCanvas");
 const ctx=canvas.getContext("2d");
 
-const player={
-    x: canvas.width/2-15,
-    y: canvas.height-60,
-    width:30,
-    height:30,
-    color:"hsla(125, 100%, 72%, 1.00)",
-    life:3,
-};
+initPlayer(canvas);
+spawnEnemy(canvas);
 
 const bullets=[] ;
-const BURRET_SPEED=-10;
+const BURRET_SPEED=-5;
 
-function tryShoot(now){
+function tryShoot(now){  
     bullets.push({
         x:player.x,
         y:player.y,
-        width:5,
-        height:5,
+        width:10,
+        height:-10,
         vy:BURRET_SPEED,
     })
 };
@@ -52,17 +50,24 @@ function draw(){
    ctx.fillStyle="hsla(0, 0%, 0%, 1.00)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.fillStyle=player.color;
-ctx.fillRect(player.x,player.y,player.width,player.height);
+drawPlayer(ctx);
 
 ctx.fillStyle="hsla(60, 100%, 78%, 1.00)";
 for (let i= bullets.length -1; i>=0; i--){
     const bullet=bullets[i];
     ctx.fillRect(bullet.x,bullet.y,bullet.width,bullet.height);
 }
+
+ctx.fillStyle="hsla(0, 100%, 57%, 1.00)";
+for (let i=0;i<enemies.length; i++){
+    const enemy=enemies[i];
+    ctx.fillRect(enemy.x,enemy.y,enemy.width,enemy.height);
 }
 
-function gameLoop() {
+}
+
+
+function gameLoop() {  
 update();
 draw();
 requestAnimationFrame(gameLoop);
