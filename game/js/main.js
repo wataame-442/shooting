@@ -1,15 +1,15 @@
 import {player,initPlayer,drawPlayer} from "./player.js";
-import {spawnEnemy,enemies} from "./enemies.js";
+import {spawnEnemy,enemies,updateEnemies,drawEnemies} from "./enemies.js";
+import {handleCollisions} from "./collision.js";
 
 
 const canvas=document.getElementById("gameCanvas");
 const ctx=canvas.getContext("2d");
 
 initPlayer(canvas);
-spawnEnemy(canvas);
 
-const bullets=[] ;
-const BURRET_SPEED=-5;
+export const bullets=[] ;
+const BURRET_SPEED=-20;
 
 function tryShoot(now){  
     bullets.push({
@@ -44,6 +44,9 @@ for (let i= bullets.length -1; i>=0; i--){
         bullets.splice(i,1);
     }
 }
+handleCollisions(canvas);
+spawnEnemy(canvas);
+updateEnemies(canvas);
 }
 
 function draw(){
@@ -53,16 +56,12 @@ ctx.fillRect(0,0,canvas.width,canvas.height);
 drawPlayer(ctx);
 
 ctx.fillStyle="hsla(60, 100%, 78%, 1.00)";
-for (let i= bullets.length -1; i>=0; i--){
+for (let i=0 ;i < bullets.length ; i++){
     const bullet=bullets[i];
     ctx.fillRect(bullet.x,bullet.y,bullet.width,bullet.height);
 }
 
-ctx.fillStyle="hsla(0, 100%, 57%, 1.00)";
-for (let i=0;i<enemies.length; i++){
-    const enemy=enemies[i];
-    ctx.fillRect(enemy.x,enemy.y,enemy.width,enemy.height);
-}
+drawEnemies(ctx);
 
 }
 
