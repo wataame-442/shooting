@@ -9,11 +9,11 @@ const ctx=canvas.getContext("2d");
 initPlayer(canvas);
 
 export const bullets=[] ;
-const BURRET_SPEED=-20;
+const BURRET_SPEED=-10;
 
 function tryShoot(now){  
     bullets.push({
-        x:player.x,
+        x:player.x + player.width/2 - 5,
         y:player.y,
         width:10,
         height:-10,
@@ -36,6 +36,13 @@ window.addEventListener("keydown", (e)=>{
     }
 });
 
+function updateScore(){
+    const scoreBoard=document.getElementById("scoreBoard");
+    scoreBoard.textContent=`Score: ${player.score}`;
+    const lifeBoard=document.getElementById("lifeBoard");
+    lifeBoard.textContent=`Life: ${player.life}`;
+}
+
 function update(){
 for (let i= bullets.length -1; i>=0; i--){
     const bullet=bullets[i];
@@ -47,6 +54,7 @@ for (let i= bullets.length -1; i>=0; i--){
 handleCollisions(canvas);
 spawnEnemy(canvas);
 updateEnemies(canvas);
+updateScore();
 }
 
 function draw(){

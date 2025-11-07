@@ -1,5 +1,7 @@
 export const enemies=[];
-const SIZE=26;
+const SIZE=80;
+const enemyImage=new Image();
+enemyImage.src="https://sakutto-sozai.com/wp-content/uploads/2021/04/virus_001.png";
 
 function pushEnemies(canvas){
     const w=SIZE;
@@ -28,6 +30,6 @@ export function updateEnemies(canvas){
 export function drawEnemies(ctx){
     ctx.fillStyle="hsla(0, 100%, 50%, 1.00)";
     for (const e of enemies){
-        ctx.fillRect(e.x,e.y,e.width,e.height);
+        ctx.drawImage(enemyImage,e.x,e.y,e.width,e.height);
     }
-}
+}  

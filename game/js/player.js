@@ -1,3 +1,6 @@
+const playerImage=new Image();
+playerImage.src="https://illustrain.com/wp-content/uploads/2016/08/illustrain08-medical_031.png";
+
 export const player={
     x: 0,
     y: 0,
@@ -5,6 +8,7 @@ export const player={
     height:30,
     color:"hsla(125, 100%, 72%, 1.00)",
     life:3,
+    score:0,
 };
 
 export function initPlayer(canvas){
@@ -15,5 +19,5 @@ export function initPlayer(canvas){
 
 export function drawPlayer(ctx){
 ctx.fillStyle=player.color;
-ctx.fillRect(player.x,player.y,player.width,player.height);
+ctx.drawImage(playerImage,player.x,player.y,player.width,player.height);
 }
