@@ -2,7 +2,8 @@ import {player,initPlayer,drawPlayer} from "./player.js";
 import {spawnEnemy,enemies,updateEnemies,drawEnemies} from "./enemies.js";
 import {handleCollisions} from "./collision.js";
 
-
+const mapImage = new Image();
+mapImage.src = "";
 const canvas=document.getElementById("gameCanvas");
 const ctx=canvas.getContext("2d");
 
